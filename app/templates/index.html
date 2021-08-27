@@ -1,9 +1,25 @@
-<!doctype html>
-<html>
-    <head>
-        <title>{{ title }}</title>
-    </head>
-    <body>
-        <h1>{{ greeting }}</h1>
-    </body>
-</html>
+{% extends "bootstrap/base.html" %}
+{% block title %}Python PasteBin{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+  <h1>Python PasteBin</h1>
+  <h3>Pastebin-like site written in Python using Flask!</h3>
+</div>
+
+<div class="container">
+  <form method="POST">
+    <div class="form-group">
+      <h4>Title</h4>
+      <input type="text" class="form-control" name="title" required>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" name="paste-text" rows="20" required>
+      </textarea>
+    </div>
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-lg btn-primary">Create New Paste</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
