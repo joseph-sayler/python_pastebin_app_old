@@ -1,11 +1,10 @@
 from secrets import token_urlsafe
-from flask import Blueprint, render_template, request, redirect, abort
+from flask import render_template, request, redirect, abort
 from app.models import Pastes
+from app.main import bp
 
-routes = Blueprint('routes', __name__)
 
-
-@routes.route("/", methods=["GET", "POST"])
+@bp.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         title = request.form.get("title").strip()
@@ -19,7 +18,7 @@ def index():
     return render_template("index.html")
 
 
-@routes.route("/<string:paste_id>/")
+@bp.route("/<string:paste_id>/")
 def render_paste(paste_id):
     try:
         paste = Pastes.get(Pastes.identifier == paste_id)
