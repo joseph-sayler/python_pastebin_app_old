@@ -5,6 +5,7 @@ from flask_moment import Moment
 moment = Moment()
 bootstrap = Bootstrap()
 
+
 def create_app():
     # "Application Factory" pattern as described in the Flask docs:
     # http://flask.pocoo.org/docs/patterns/appfactories/
@@ -13,8 +14,8 @@ def create_app():
 
     moment.init_app(app)
     bootstrap.init_app(app)
-    
-    from app.routes import routes
-    app.register_blueprint(routes)
+
+    from app.main import bp as app_main
+    app.register_blueprint(app_main)
 
     return app
