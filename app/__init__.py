@@ -1,18 +1,20 @@
-import click, peewee, os
 from flask import Flask
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 
-app = Flask(__name__)
-Bootstrap(app)
+moment = Moment()
+bootstrap = Bootstrap()
 
-# place at bottom to avoid circular imports
-from app import routes, models
+def create_app():
+    # "Application Factory" pattern as described in the Flask docs:
+    # http://flask.pocoo.org/docs/patterns/appfactories/
 
-@app.cli.command("create-pastes-table")
-def create_user():
-    """create the pastes_db.db file and add the Pastes table. does nothing if table already exists
-    """
-    try:
-        models.Pastes.create_table()
-    except peewee.OperationalError:
-        print("Pastes table already exists in database")
+    app = Flask(__name__)
+
+    moment.init_app(app)
+    bootstrap.init_app(app)
+    
+    from app.routes import routes
+    app.register_blueprint(routes)
+
+    return app
