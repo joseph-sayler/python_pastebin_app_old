@@ -1,4 +1,6 @@
-import click, peewee, os
+import click
+import peewee
+import os
 from app import models
 
 
