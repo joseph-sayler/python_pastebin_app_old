@@ -1,0 +1,23 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+    {% if title %}
+        {{ paste.title }} - Python PasteBin
+    {% else %}
+        Python PasteBin
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1>Python PasteBin</h1>
+        <h3>Pastebin-like site written in Python using Flask!</h3>
+    </div>
+    <div class="container">
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}

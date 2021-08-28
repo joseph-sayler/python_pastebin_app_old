@@ -1,22 +1,14 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}
-  {{ paste.title }} - Python PasteBin
-{% endblock %}
+{% extends "base.html" %}
 
-{% block content %}
-<div class="jumbotron text-center">
-  <h1>Python PasteBin</h1>
-  <h3>Pastebin-like site written in Python using Flask!</h3>
-</div>
-
+{% block app_content %}
 <div class="container">
   <form>
     <div class="form-group">
-      <h4>"{{ paste.title }}"</h4>
+      <p><span class="text-left"><h5>"{{ paste.title }}"</h5></span> <span class="text-right"><i>{{ moment(paste.date).format(date_format) }}</i></span></p>
       <textarea class="form-control" rows="10" readonly>{{ paste.paste_text }}</textarea>
     </div>
     <div class="form-group text-center">
-      <a href="{{ url_for('index') }}"><button type="button" class="btn btn-lg btn-primary">Create Another Paste</button></a>
+      <a href="{{ url_for('routes.index') }}"><button type="button" class="btn btn-lg btn-primary">Create Another Paste</button></a>
     </div>
   </form>
 </div>
