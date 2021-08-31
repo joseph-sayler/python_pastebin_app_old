@@ -2,6 +2,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from playhouse.flask_utils import FlaskDB
+from config import Config
 
 
 moment = Moment()
@@ -9,12 +10,12 @@ bootstrap = Bootstrap()
 db_wrapper = FlaskDB()
 
 
-def create_app():
+def create_app(config_class=Config):
     # "Application Factory" pattern as described in the Flask docs:
     # http://flask.pocoo.org/docs/patterns/appfactories/
 
     app = Flask(__name__)
-    app.config['DATABASE'] = 'sqlite:///paste_db.db'
+    app.config.from_object(config_class)
 
     moment.init_app(app)
     bootstrap.init_app(app)
