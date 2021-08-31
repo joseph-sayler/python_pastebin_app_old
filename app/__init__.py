@@ -1,14 +1,13 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
-from playhouse.flask_utils import FlaskDB
 from config import Config
+from .database import Database
 
 
 moment = Moment()
 bootstrap = Bootstrap()
-db_wrapper = FlaskDB()
-
+db_wrapper = Database()
 
 def create_app(config_class=Config):
     # "Application Factory" pattern as described in the Flask docs:
