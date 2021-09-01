@@ -1,21 +1,22 @@
-from playhouse.flask_utils import FlaskDB
+import peewee
 
 
 class Database:
-    """class to handle database selection"""
+    """class to handle database selection based on user configuration"""
 
-    def __init__(self, app=None):
-        self._app = app
-        self.flaskDB = FlaskDB()
-        if app is not None:
-            self.init_app(app)
+    def __init__(self, config=None):
+        self._config = config
+        if config is not None:
+            self.init_db(config)
 
-    def init_app(self, app):
-        self._app = app
-        if 'DATABASE_TYPE' in app.config:
-            if app.config['DATABASE_TYPE'] == "ORM":
-                self.flaskDB.init_app(app)
-            elif app.config['DATABASE_TYPE'] == "FAUNA":
+    def init_db(self, config):
+        self._config = config
+        if config.DATABASE_TYPE and config.DATABASE:
+            if config.DATABASE_TYPE.lower() == "sqlite":
+                self.database = peewee.SqliteDatabase(config.DATABASE)
+            elif config.DATABASE_TYPE.lower() == "fauna":
                 pass
             else:
                 pass
+        else:
+            pass
