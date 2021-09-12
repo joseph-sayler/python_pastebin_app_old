@@ -22,8 +22,5 @@ def index():
 
 @bp.route("/<string:paste_id>/")
 def render_paste(paste_id):
-    try:
-        paste = Pastes.query.get(paste_id)
-    except:
-        abort(404)
+    paste = Pastes.query.get_or_404(paste_id)
     return render_template("results.html", paste=paste, date_format="MMM Do, YYYY [@] h:mm A")
