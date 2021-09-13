@@ -1,12 +1,16 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
-from config import Config
+from config import Config, Database_config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from app.database import Fauna_DB
 
 
-db = SQLAlchemy()
+if Database_config.DATABASE_TYPE == "FAUNA":
+    db = Fauna_DB
+else:  # == "SQLITE"
+    db = SQLAlchemy()
 migrate = Migrate()
 moment = Moment()
 bootstrap = Bootstrap()
