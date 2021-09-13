@@ -53,8 +53,9 @@ class Fauna_DB:
             self.__data.date = datetime.strftime(
                 self.__data.date, "%Y-%m-%d %H:%M:%S.%f")
             # convert __data to dict for storing in fauna
+            output = self.__data.__dict__
             self.__client.query(
-                q.create(q.collection(self.__collections), self.__data.__dict__))
+                q.create(q.collection(self.__collections), {"data": output}))
 
         def query(self, cls):
             self.__class = cls
