@@ -13,3 +13,20 @@ class Pastes(db.Model):
 
     def __repr__(self):
         return f'<Paste {self.identifier}>'
+
+
+class Fauna_Pastes:
+    """table to hold user pastes"""
+
+    def __init__(self, identifier=None, title=None, paste_text=None, date=None):
+        self.identifier = identifier
+        self.title = title
+        self.paste_text = paste_text
+        self.date = date if date else datetime.utcnow()
+
+    def _from_dict(self, data):
+        for key, value in data.items():
+            setattr(self, key, value)
+
+    def __repr__(self):
+        return f'<Paste {self.identifier}>'
