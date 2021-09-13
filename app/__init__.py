@@ -24,7 +24,10 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     db.init_app(app)
+    
+    if Database_config.DATABASE_TYPE == "SQLITE":
     migrate.init_app(app, db)
+
     moment.init_app(app)
     bootstrap.init_app(app)
 
