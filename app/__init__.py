@@ -2,15 +2,10 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from config import Config, Database_config
-from flask_sqlalchemy import SQLAlchemy
+from app.models import db
 from flask_migrate import Migrate
-from app.database import Fauna_DB
 
 
-if Database_config.DATABASE_TYPE == "FAUNA":
-    db = Fauna_DB
-else:  # == "SQLITE"
-    db = SQLAlchemy()
 migrate = Migrate()
 moment = Moment()
 bootstrap = Bootstrap()
@@ -24,9 +19,9 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     db.init_app(app)
-    
+
     if Database_config.DATABASE_TYPE == "SQLITE":
-    migrate.init_app(app, db)
+        migrate.init_app(app, db)
 
     moment.init_app(app)
     bootstrap.init_app(app)
