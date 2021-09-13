@@ -12,6 +12,7 @@ class Database_config:
     DATABASE = os.environ.get('DATABASE', None)
     DATABASE_TYPE = os.environ.get('DATABASE_TYPE', None)
 
+
 class Fauna_config:
     FAUNA_SECRET_KEY = os.environ.get("FAUNA_SECRET_KEY", None)
     FAUNA_DOMAIN = os.environ.get("FAUNA_DOMAIN", None)
