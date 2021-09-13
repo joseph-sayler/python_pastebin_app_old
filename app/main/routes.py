@@ -1,9 +1,14 @@
 from app import db
 from secrets import token_urlsafe
 from flask import render_template, request, redirect, abort
-from app.models import Pastes
 from app.main import bp
 from config import TOKEN_SIZE
+from config import Database_config
+
+if Database_config.DATABASE_TYPE == "FAUNA":
+    from app.models import Fauna_Pastes as Pastes
+else:  # == "SQLITE"
+    from app.models import SQL_Pastes as Pastes
 
 
 @bp.route("/", methods=["GET", "POST"])
